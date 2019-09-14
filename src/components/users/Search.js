@@ -36,7 +36,13 @@ class Search extends Component {
                     <button type='submit' className='btn btn-dark btn-block'>Search</button>
                 </form>
                 {showClear && 
-                <button onClick={clearUsers} className='btn btn-light btn-block'>Clear</button>
+                <button 
+                    onClick={clearUsers} 
+                    className='btn btn-light btn-block'
+                    data-test-id='clearButton'
+                >
+                    Clear
+                </button>
                 }
             </div>
         );
