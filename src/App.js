@@ -4,7 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 class App extends Component {
 
@@ -13,10 +13,10 @@ class App extends Component {
     loading: false
   };
 
-  static propTypes = { 
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired
-  };
+  //static propTypes = { 
+  //  searchUsers: PropTypes.func.isRequired,
+  //  clearUsers: PropTypes.func.isRequired
+  //};
 
   searchUsers = async (text) => {
     this.setState({loading: true})
