@@ -89,4 +89,22 @@ describe("Github Finder search functionality", () => {
 
     });
   });
+
+  describe('Alert', () => {
+    it('should show an alert if the user submits an empty search', () => {
+      cy.visit('http://localhost:3000');
+      cy.get('.btn').click();
+      cy.get('.alert').should('exist');
+    });
+
+    it('should hide the alert after a short period of time', () => {
+      cy.visit('http://localhost:3000');
+      cy.get('.btn').click();
+      cy.get('.alert').should('exist');
+      cy.wait(3250).then(() => {
+        cy.get('.alert').should('not.exist');
+      });
+    });
+
+  });
 });
