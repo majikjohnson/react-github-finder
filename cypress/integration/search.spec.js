@@ -62,6 +62,14 @@ describe("Github Finder search functionality", () => {
         .should("have.attr", "href", "https://github.com/majikang")
         .and("have.text", "more");
     });
+
+    it('should maintain search results when navigating between pages', () => {
+      cy.get('nav.navbar').contains('About').click();
+      cy.url().should('contain', '/about');
+      cy.get('nav.navbar').contains('Home').click();
+      cy.get('[data-test-selector="userCard"]').should("have.length", 30);
+    });
+
   });
 
   describe('Clear button', () => {
