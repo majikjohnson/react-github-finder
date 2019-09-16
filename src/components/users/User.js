@@ -36,7 +36,7 @@ class User extends Component {
     if (loading) return <Spinner />;
     return (
       <Fragment>
-        <Link to="/" className="btn btn-light">
+        <Link to="/" className="btn btn-light" data-test-btn-back>
           Back to Search
         </Link>
         Hireable:{" "}
@@ -46,7 +46,7 @@ class User extends Component {
           <i className="fas fa-times-circle text-danger" />
         )}
         <div className="card grid-2">
-          <div className="all-center">
+          <div data-test-usercard className="all-center">
             <img
               src={avatar_url}
               alt={login}
@@ -54,9 +54,9 @@ class User extends Component {
               style={{ width: "150px" }}
             />
             <h2>{name || login}</h2>
-            <p>{location || 'unknown'}</p>
+            <p>{location || "unknown"}</p>
           </div>
-          <div>
+          <div data-test-bio>
             {bio && (
               <Fragment>
                 <h3>Bio</h3>
@@ -87,7 +87,7 @@ class User extends Component {
             </ul>
           </div>
         </div>
-        <div className="card text-center">
+        <div className="card text-center" data-test-badges >
           <div className="badge badge-primary">Followers: {followers}</div>
           <div className="badge badge-success">Following: {following}</div>
           <div className="badge badge-light">Public Repos: {public_repos}</div>

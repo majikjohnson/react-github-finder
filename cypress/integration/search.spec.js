@@ -59,7 +59,7 @@ describe("Github Finder search functionality", () => {
 
     it("should have user items that contain a button pointing to the user github profile page", () => {
       cy.get('[data-test-selector="userCard"]:nth-child(3) a')
-        .should("have.attr", "href", "https://github.com/majikang")
+        .should("have.attr", "href", "/user/majikang")
         .and("have.text", "more");
     });
 
