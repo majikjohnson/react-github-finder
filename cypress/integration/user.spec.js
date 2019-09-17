@@ -1,9 +1,19 @@
 /// <reference types="Cypress" />
 
+const startUserPageStubs = (user) => {
+  const apiUser = `https://api.github.com/users/${user}?client_id=${Cypress.env('REACT_APP_GITHUB_CLIENT_ID')}&client_secret=${Cypress.env('REACT_APP_GITHUB_CLIENT_SECRET')}`
+  const apiRepos = `https://api.github.com/users/${user}/repos?per_page=5&sort=created:asc&client_id=${Cypress.env('REACT_APP_GITHUB_CLIENT_ID')}&client_secret=${Cypress.env('REACT_APP_GITHUB_CLIENT_SECRET')}`
+  cy.server();
+  cy.route('GET', apiUser, `fixture:github/users/user_${user}`).as('getUser');
+  cy.route('GET', apiRepos, `fixture:github/repos/repos_${user}`).as('getRepos');
+};
+
 describe("User Page", () => {
   describe("Main User Details Card", () => {
     before(() => {
-        cy.visit("http://localhost:3000/user/bradtraversy");
+      startUserPageStubs('bradtraversy');
+      cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.wait(['@getUser', '@getRepos']);
     });
     
     it("should display a tick if the user is hireable", () => {
@@ -60,7 +70,9 @@ describe("User Page", () => {
 
   describe("Navigation", () => {
     beforeEach(() => {
+      startUserPageStubs('bradtraversy');
       cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.wait(['@getUser', '@getRepos']);
     });
 
     it('should navigate to the home page when the user clicks "Back to Search"', () => {
@@ -71,8 +83,11 @@ describe("User Page", () => {
 
   describe("Repos", () => {
     before(() => {
-        cy.visit("http://localhost:3000/user/bradtraversy");
-      });
+      startUserPageStubs('bradtraversy');
+      cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.wait(['@getUser', '@getRepos']);
+    });
+
     it("should show 5 most recent repos for the user", () => {
       cy.get("[data-test-repo-card]").should("have.length", 5);
     });
