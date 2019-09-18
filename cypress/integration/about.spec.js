@@ -2,7 +2,7 @@
 
 describe('About page', () => {
     before(() => {
-        cy.visit('http://localhost:3000/about')
+        cy.visit('/about')
     });
     
     it('should have the correct heading', () => {

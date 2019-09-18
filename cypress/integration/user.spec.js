@@ -12,7 +12,7 @@ describe("User Page", () => {
   describe("Main User Details Card", () => {
     before(() => {
       startUserPageStubs('bradtraversy');
-      cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.visit("/user/bradtraversy");
       cy.wait(['@getUser', '@getRepos']);
     });
     
@@ -71,20 +71,20 @@ describe("User Page", () => {
   describe("Navigation", () => {
     beforeEach(() => {
       startUserPageStubs('bradtraversy');
-      cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.visit("/user/bradtraversy");
       cy.wait(['@getUser', '@getRepos']);
     });
 
     it('should navigate to the home page when the user clicks "Back to Search"', () => {
       cy.get("[data-test-btn-back]").click();
-      cy.url().should("be.equal", "http://localhost:3000/");
+      cy.url().should("be.equal", Cypress.config().baseUrl + '/');
     });
   });
 
   describe("Repos", () => {
     before(() => {
       startUserPageStubs('bradtraversy');
-      cy.visit("http://localhost:3000/user/bradtraversy");
+      cy.visit("/user/bradtraversy");
       cy.wait(['@getUser', '@getRepos']);
     });
 

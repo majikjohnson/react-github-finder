@@ -1,4 +1,5 @@
 {
+    "baseUrl": "http://localhost:3000",
     "env": {
         "REACT_APP_GITHUB_CLIENT_ID": "f884d6eabec275028f7f",
         "REACT_APP_GITHUB_CLIENT_SECRET": "166936ef77349dac0b0196bde54ffc0a65c17ff4"
