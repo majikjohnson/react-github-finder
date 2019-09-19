@@ -1,11 +1,5 @@
 /// <reference types="Cypress" />
 
-const startSearchPageStubs = (searchTerm) => {
-  const apiSearch = `https://api.github.com/search/users?q=${searchTerm}&client_id=${Cypress.env('REACT_APP_GITHUB_CLIENT_ID')}&client_secret=${Cypress.env('REACT_APP_GITHUB_CLIENT_SECRET')}`
-  cy.server();
-  cy.route('GET', apiSearch, `fixture:github/users/search_${searchTerm}`);
-};
-
 describe("Github Finder search functionality", () => {
   const githubSearchUsersEndpoint = "/search/users*";
   const githubUserSearchTerm = "brad";
@@ -31,7 +25,7 @@ describe("Github Finder search functionality", () => {
   describe("Search results", () => {
     before(() => {
       const githubUserSearchTerm = "brad";
-      startSearchPageStubs(githubUserSearchTerm);
+      cy.startSearchPageStubs(githubUserSearchTerm);
       cy.visit("/");
       cy.get('[data-test-id="searchBox"]').type(githubUserSearchTerm);
       cy.get(".btn").click();
@@ -75,7 +69,7 @@ describe("Github Finder search functionality", () => {
     const githubUserSearchTerm = "brad";
     
     beforeEach(() => {
-      startSearchPageStubs(githubUserSearchTerm);
+      cy.startSearchPageStubs(githubUserSearchTerm);
       cy.visit("/");
     });    
 
