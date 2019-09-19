@@ -7,12 +7,14 @@ describe("Github Finder search functionality", () => {
   describe("Spinner Component", () => {
     it.only("should display spinner while waiting for Github API call to return", () => {
       cy.server();
-      cy.route({
-        method: "GET",
-        url: githubSearchUsersEndpoint,
-        response: `fixture:github/users/search_${githubUserSearchTerm}.json`,
-        delay: 3000
-      });
+      //cy.route({
+      //  method: "GET",
+      //  url: githubSearchUsersEndpoint,
+      //  response: `fixture:github/users/search_${githubUserSearchTerm}.json`,
+      //  delay: 3000
+      //});
+      const githubUserSearchTerm = "brad";
+      cy.startSearchPageStubs(githubUserSearchTerm, 3000);
       cy.visit("/");
       cy.get('[data-test-id="searchBox"]').type(githubUserSearchTerm);
       cy.get(".btn").click();
