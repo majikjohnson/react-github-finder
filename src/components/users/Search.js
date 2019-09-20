@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import GithubContext from "../../context/github/githubContext";
 import PropTypes from "prop-types";
 
-const Search = ({ clearUsers, showClear, setAlert, searchUsers }) => {
+const Search = ({ setAlert }) => {
   const [text, setText] = useState("");
+  const githubContext = useContext(GithubContext);
 
   const onChange = e => {
     setText(e.target.value);
@@ -13,7 +15,7 @@ const Search = ({ clearUsers, showClear, setAlert, searchUsers }) => {
     if (text === "") {
       setAlert("Please enter a search term", "light");
     } else {
-      searchUsers(text);
+      githubContext.searchUsers(text);
     }
   };
 
@@ -32,9 +34,9 @@ const Search = ({ clearUsers, showClear, setAlert, searchUsers }) => {
           Search
         </button>
       </form>
-      {showClear && (
+      {githubContext.users.length > 0 && (
         <button
-          onClick={clearUsers}
+          onClick={githubContext.clearUsers}
           className="btn btn-light btn-block"
           data-test-id="clearButton"
         >
@@ -46,9 +48,6 @@ const Search = ({ clearUsers, showClear, setAlert, searchUsers }) => {
 };
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired
 };
 
